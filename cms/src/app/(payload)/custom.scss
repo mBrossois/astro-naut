@@ -1,0 +1,138 @@
+@layer payload-default {
+
+
+    /* Global styles */
+    a {
+        text-decoration: none;
+    }
+    
+    /* Nav group styles */
+    .nav-group {
+        .nav-group__toggle {
+            font-size: 1.25rem;
+        }
+    }
+    .nav-group__content > .nav__link:hover {
+        text-decoration: none!important;
+
+        .nav__link-label {
+            font-weight: 600;
+        }
+        
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            inset-inline-start: -20px;
+            width: 2px;
+            height: 16px;
+            border-start-end-radius: 2px;
+            border-end-end-radius: 2px;
+            background: var(--theme-text);
+        }
+    }
+    
+    /* List header styles */
+    .list-header__title-actions {
+        margin-bottom: 0;
+        overflow: hidden;
+        border-radius: var(--style-radius-s);
+
+    }
+
+    /* Button styles */
+    .btn:not(.list-create-new-doc__create-new-button) {
+        padding: .75rem 1.25rem!important;
+
+        .btn__label {
+            line-height: 1;
+        }
+    }
+
+    .list-create-new-doc__create-new-button.btn {
+            position: relative;
+            z-index: 10;
+            padding: 0!important;
+
+            .btn__content {
+                position: relative;
+                z-index: 2;
+                background-color: black;
+                height: 35px;
+                width: 106px;
+                border-radius: var(--style-radius-s);
+                background-color: var(--bg-color, transparent);
+            }
+
+            &:hover {
+                .btn__content {
+                    color: var(--hover-color);
+                    background-color: var(--hover-bg);
+                }
+            }
+            /* Animated gradient border */
+            &::before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                z-index: 1;
+                padding: 4px;
+                background: #00c3ff;
+                animation: gradient-border 4s linear infinite;
+
+                pointer-events: none;
+                width: 20px;
+                height: 20px;
+            }
+            
+            @keyframes gradient-border {
+                0% {
+                    translate: 0 -24px;
+                }
+                31% {
+                    translate: calc(106px - 24px) calc(0px - 24px);
+                }
+                39% {
+                    translate: 106px 0px;
+                }
+                47% {
+                    translate: 106px calc(35px - 15px);
+                }
+                55% {
+                    translate: calc(106px - 24px) 35px;
+                }
+                78% {
+                    translate: 0 35px;
+                }
+                82% {
+                    translate: -24px calc(35px - 15px);
+                }
+                90% {
+                    translate: -24px 0;
+                }
+                100% {
+                    translate: 0 -24px;
+                }
+            }
+    }
+
+    /* Search styles */
+    .search-bar {
+        background: none;
+        border: 1px solid var(--theme-elevation-600);
+    }
+
+    /* Make table rows clickable */
+    .table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--theme-elevation-100);
+        }
+
+        td {
+            vertical-align: middle;
+        }
+    }
+}

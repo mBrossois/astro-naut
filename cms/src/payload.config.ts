@@ -21,6 +21,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      providers: ['./components/ClickableRows.tsx'],
+    },
   },
   collections: [
     Users, 
