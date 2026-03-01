@@ -35,9 +35,8 @@
     /* List header styles */
     .list-header__title-actions {
         margin-bottom: 0;
-        overflow: hidden;
         border-radius: var(--style-radius-s);
-
+        align-items: center;
     }
 
     /* Button styles */
@@ -49,10 +48,18 @@
         }
     }
 
+    .btn[aria-label="Bulk Upload"] {
+        height: 35px;
+    }
+
     .list-create-new-doc__create-new-button.btn {
             position: relative;
             z-index: 10;
             padding: 0!important;
+            width: 110px!important;
+            height: 39px!important;
+            overflow: hidden;
+            background-color: transparent!important;
 
             .btn__content {
                 position: relative;
@@ -62,6 +69,7 @@
                 width: 106px;
                 border-radius: var(--style-radius-s);
                 background-color: var(--bg-color, transparent);
+                translate: 1px 1px;
             }
 
             &:hover {
@@ -78,6 +86,8 @@
                 z-index: 1;
                 padding: 4px;
                 background: #00c3ff;
+                translate: 106px 0px;
+
                 animation: gradient-border 4s linear infinite;
 
                 pointer-events: none;
