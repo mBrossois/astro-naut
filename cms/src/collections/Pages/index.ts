@@ -10,7 +10,7 @@ import type { CollectionConfig } from 'payload'
 import { Content } from '@/blocks/Content'
 // import { FormBlock } from '@/blocks/Form/config'
 // import { MediaBlock } from '@/blocks/MediaBlock/config'
-// import { hero } from '@/fields/hero'
+import { Hero } from '@/blocks/Hero'
 import { slugField } from 'payload'
 // import { adminOrPublishedStatus } from '@/access/adminOrPublishedStatus'
 import {
@@ -27,6 +27,9 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
+  },
+  access: {
+    read: () => true,
   },
 //   access: {
 //     create: adminOnly,
@@ -91,6 +94,7 @@ export const Pages: CollectionConfig = {
                         blocks: [
                             EntriesOverview,
                             Content,
+                            Hero,
                         ]
                     }
                 ]

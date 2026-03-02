@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Entry } from '@cms/payload-types';
+import EntriesComponent from '../components/Entries.astro';
+
+const response = await fetch('http://localhost:3000/api/entries?limit=100&sort=createdAt:desc', {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json',
+		'x-access-token': '12345',
+	},
+});
+
+let entries: Entry[] = [];
+try {
+	const data = await response.json();
+	entries = data?.docs;
+} catch (error) {
+	console.error('Failed to fetch entries:', error);
+}
+---
+
+<Layout>
+    <h1 class="text-4xl font-bold text-purple-300 p-4">Entries</h1>
+	<EntriesComponent entries={entries} />
+</Layout>

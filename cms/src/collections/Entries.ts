@@ -1,4 +1,5 @@
-import { type CollectionConfig } from 'payload'
+import { adminOrAccessToken } from '@/utils/auth'
+import { type CollectionConfig, type FieldAccess } from 'payload'
 
 export const Entries: CollectionConfig = {
   slug: 'entries',
@@ -10,15 +11,13 @@ export const Entries: CollectionConfig = {
   },
   fields: [
     { 
-      name: 'slug', 
-      type: 'text', 
-      admin: { readOnly: true }, 
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      required: true,
       access: {
-        read: ({ req: { user } }) => {
-            return !!(user && user.roles && user.roles.includes('admin'))
-        },
+        read: adminOrAccessToken,
       },
-      defaultValue: 'entries' 
     },
     {
       name: 'title',

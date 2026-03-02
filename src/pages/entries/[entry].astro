@@ -1,0 +1,75 @@
+---
+import type { Entry, Media } from '@cms/payload-types';
+import Layout from '../../layouts/Layout.astro';
+import InfoBlock from '../../components/InfoBlock.astro';
+import SerializedRichtext from '../../components/SerializedRichtext.astro';
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
+import { lexicalToHTML } from '../../utils/lexicalToHtml';
+import { sanitizeHTML } from '../../utils/sanitizeHtml';
+
+
+export async function getStaticPaths() {
+  const response = await fetch(`http://localhost:3000/api/entries`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': '12345',
+    },
+  });
+
+  const data = await response.json();
+  const entries: Entry[] = data.docs ?? [];
+
+  return entries.map(entry => ({
+    params: { entry: entry.slug },
+    props: { entryData: entry },
+  }));
+}
+
+const { entryData } = Astro.props;
+
+const learningsHtml = lexicalToHTML(entryData?.learnings);
+const nextStepsHtml = lexicalToHTML(entryData?.nextSteps);
+const learningsHtmlSanitized = sanitizeHTML(learningsHtml);
+const nextStepsHtmlSanitized = sanitizeHTML(nextStepsHtml);
+console.log(nextStepsHtmlSanitized);
+---
+
+<Layout>
+    <div class="container p-4 flex flex-col gap-4">
+        <h1 class="text-4xl font-bold text-purple-300">{entryData?.title}</h1>
+        <div class="flex gap-4">
+            <img src={`http://localhost:3000${(entryData?.thumbnail as Media)?.url}`} alt={entryData?.title} class="h-48 w-48 object-cover rounded-t-lg opacity-70 " />
+            <div class="text-white flex flex-col gap-4">
+                <InfoBlock>
+                    <span class="contents" slot="title">Description</span>
+                    <p slot="description">{entryData?.description}</p>
+                </InfoBlock>
+                <InfoBlock>
+                    <span class="contents" slot="title">Created At</span>
+                    <p slot="description">{new Date(entryData?.createdAt).toLocaleDateString()}</p>
+                </InfoBlock>
+                <InfoBlock> 
+                    <span class="contents" slot="title">Tags</span>
+                    <div slot="description">
+                        <ul>
+                            {entryData?.tags.map((tag) => (
+                                <li key={tag.id}>{tag.tag}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </InfoBlock>
+            </div>
+        </div>
+        <div class="flex flex-col gap-4 text-white">
+            <InfoBlock>
+                <span class="contents" slot="title">Learnings</span>
+                <div slot="description"><div set:html={learningsHtmlSanitized} /></div>
+            </InfoBlock>
+            <InfoBlock>
+                <span class="contents" slot="title">Next Steps</span>
+                <div slot="description"><div set:html={nextStepsHtmlSanitized} /></div>
+            </InfoBlock>
+        </div>
+    </div>
+</Layout>

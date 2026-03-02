@@ -131,7 +131,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  roles: 'admin' | 'editor' | 'user';
+  roles: 'admin' | 'editor' | 'readOnly';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -176,7 +176,7 @@ export interface Media {
  */
 export interface Entry {
   id: number;
-  slug?: string | null;
+  slug: string;
   title: string;
   description?: string | null;
   thumbnail?: (number | null) | Media;
@@ -226,7 +226,7 @@ export interface Page {
   id: number;
   title: string;
   publishedOn?: string | null;
-  content?: (EntriesOverview | ContentBlock)[] | null;
+  content?: (EntriesOverview | ContentBlock | Hero)[] | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -299,6 +299,22 @@ export interface RichText {
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero".
+ */
+export interface Hero {
+  heading: string;
+  subheading?: string | null;
+  image?: (number | null) | Media;
+  cta?: {
+    label?: string | null;
+    url?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -456,6 +472,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         EntriesOverview?: T | EntriesOverviewSelect<T>;
         content?: T | ContentBlockSelect<T>;
+        Hero?: T | HeroSelect<T>;
       };
   generateSlug?: T;
   slug?: T;
@@ -511,6 +528,23 @@ export interface ImageSelect<T extends boolean = true> {
  */
 export interface RichTextSelect<T extends boolean = true> {
   richText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  image?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
   id?: T;
   blockName?: T;
 }

@@ -1,3 +1,23 @@
+---
+import '../styles/global.css';
+import type { Nav, Page } from '@cms/payload-types';
+
+const response = await fetch('http://localhost:3000/api/globals/nav', {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+});
+let nav: Nav | null = null;
+try {
+	const data = await response.json();
+	nav = data;
+} catch (error) {
+	console.error('Failed to fetch nav:', error);
+}
+
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,9 +26,42 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Astro-naut</title>
 	</head>
-	<body>
+	<body class="bg-gray-950">
+		<header class="bg-black border-b border-gray-800 text-purple-300 p-2">
+			<nav class="container mx-auto flex gap-4 items-center">
+				<a href="/" class="text-2xl font-bold">Astro-naut</a>
+				<ul class="flex space-x-4">
+					{nav?.items
+						// Only include items where page is an object and slug is not empty and not 'home'
+						.filter(item => typeof item.page === "object" && item.page !== null && item.page.slug && item.page.slug !== 'home')
+						.map(item => {
+							const page = item.page as Page;
+							const slug = page.slug;
+							const title = page.title;
+							// Mark active based on the current URL
+							const active = Astro.url.pathname.replace(/^\/|\/$/g, '') === slug.replace(/^\/|\/$/g, '');
+							return (
+								<li>
+									<a 
+										href={`/${slug}`} 
+										class={[
+											'text-sm',
+											!active && 'hover:text-purple-400',
+											active ? 'text-purple-300 font-bold' : ''
+										].join(' ')}
+										aria-current={active ? "page" : undefined}
+									>
+										{title}
+									</a>
+								</li>
+							)
+						})
+					}
+				</ul>
+			</nav>
+		</header>
 		<slot />
 	</body>
 </html>
