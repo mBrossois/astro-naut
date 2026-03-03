@@ -9,7 +9,7 @@ import { sanitizeHTML } from '../../utils/sanitizeHtml';
 
 
 export async function getStaticPaths() {
-  const response = await fetch(`http://localhost:3000/api/entries`, {
+  const response = await fetch(`http://localhost:3000/api/entries?where[_status][equals]=published`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

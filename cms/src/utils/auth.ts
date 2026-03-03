@@ -6,8 +6,13 @@ const isAdmin = (user: User | null) => {
 }
 
 export const adminOrAccessToken: FieldAccess = ({ req }) => {
-  const accessToken = req?.headers?.get('x-access-token') === '12345';
-  return !!(isAdmin(req.user) || accessToken)
+    if(isAdmin(req.user)) {
+        return true
+    }
+    if(req?.headers?.get('x-access-token') === '12345') {
+        return true
+    }
+    return false
 }
 
 export const loggedIn: Access = ({ req: { user } }) => {

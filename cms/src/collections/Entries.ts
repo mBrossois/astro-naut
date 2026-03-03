@@ -9,6 +9,9 @@ export const Entries: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  versions: {
+    drafts: true,
+  },
   fields: [
     { 
       name: 'slug',
@@ -50,5 +53,8 @@ export const Entries: CollectionConfig = {
         type: 'richText',
     }
   ],
+  lockDocuments: {
+    duration: 600, // Duration in seconds
+  },
   trash: true,
 }

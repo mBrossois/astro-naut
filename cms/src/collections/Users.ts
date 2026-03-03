@@ -7,6 +7,9 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
+  versions: {
+    drafts: false,
+  },
   access: {
     read: ({req: {user}}) => {
       return !!(user && user.roles && readRoles.includes(user.roles))

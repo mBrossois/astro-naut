@@ -24,6 +24,13 @@ export default buildConfig({
     components: {
       providers: ['./components/ClickableRows.tsx'],
     },
+    autoLogin: process.env.NODE_ENV === 'development'
+        ? {
+            email: process.env.PAYLOAD_EMAIL,
+            password: process.env.PAYLOAD_PASSWORD,
+            prefillOnly: true,
+          }
+        : false,
   },
   collections: [
     Users, 
