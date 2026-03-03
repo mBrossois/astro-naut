@@ -5,12 +5,14 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Entries } from './collections/Entries'
-import { Pages } from './collections/Pages'
+import { Users } from '@collections/Users'
+import { Media } from '@collections/Media'
+import { Entries } from '@collections/Entries'
+import { Pages } from '@collections/Pages'
+import { What } from '@globals/What'
+import { Crazy } from '@collections/Crazy'
 
-import { Nav } from './globals/Nav'
+import { Nav } from '@globals/Nav'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -36,10 +38,12 @@ export default buildConfig({
     Users, 
     Media,
     Entries,
-    Pages
+    Pages,
+    Crazy,
   ],
   globals: [
-    Nav
+    Nav,
+    What,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

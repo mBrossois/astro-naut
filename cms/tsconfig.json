@@ -28,6 +28,27 @@
       ],
       "@payload-config": [
         "./src/payload.config.ts"
+      ],
+      "@collections/*": [
+        "./src/collections/*"
+      ],
+      "@globals/*": [
+        "./src/globals/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@access/*": [
+        "./src/access/*"
+      ],
+      "@payload/*": [
+        "./src/payload/*"
+      ],
+      "@payload-types": [
+        "./src/payload-types.ts"
       ]
     },
     "target": "ES2022",

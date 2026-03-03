@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@theme {
+  --animate-sway: sway 10s ease-in-out infinite alternate;
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
 ul {
   list-style-type: disc;
   list-style-position: inside;
