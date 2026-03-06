@@ -1,10 +1,10 @@
-import { adminOrAccessToken } from '@/utils/auth'
+import { adminOrAccessToken, adminOrPublished } from '@/utils/auth'
 import { type CollectionConfig, type FieldAccess } from 'payload'
 
 export const Entries: CollectionConfig = {
   slug: 'entries',
   access: {
-    read: () => true,
+    read: adminOrPublished,
   },
   admin: {
     useAsTitle: 'title',
@@ -21,6 +21,9 @@ export const Entries: CollectionConfig = {
       access: {
         read: adminOrAccessToken,
       },
+      admin: {
+        position: 'sidebar'
+      }
     },
     {
       name: 'title',
@@ -42,7 +45,10 @@ export const Entries: CollectionConfig = {
         required: true,
         fields: [
             { name: 'tag', type: 'select', required: true, options: ['Web Dev FE', 'Web Dev BE', '3D Printing', 'Other'] }
-        ]
+        ],
+        admin: {
+          position: 'sidebar'
+        }
     },
     {
         name: 'learnings',
