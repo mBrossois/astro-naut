@@ -9,8 +9,6 @@ import { Users } from '@collections/Users'
 import { Media } from '@collections/Media'
 import { Entries } from '@collections/Entries'
 import { Pages } from '@collections/Pages'
-import { What } from '@globals/What'
-import { Crazy } from '@collections/Crazy'
 
 import { Nav } from '@globals/Nav'
 
@@ -39,11 +37,9 @@ export default buildConfig({
     Media,
     Entries,
     Pages,
-    Crazy,
   ],
   globals: [
     Nav,
-    What,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
