@@ -26,7 +26,7 @@ const ClickableRowsProvider: React.FC<Props> = ({ children }) => {
       const row = target.closest('tr')
       if (!row) return
 
-      const link = row.querySelector('a[href*="/admin/collections/"]') as HTMLAnchorElement
+      const link = row.querySelector('a[href*="/collections/"]') as HTMLAnchorElement
       if (link?.href) {
         router.push(link.href)
       }
