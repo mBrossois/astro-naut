@@ -181,7 +181,7 @@ export interface Entry {
    */
   generateSlug?: boolean | null;
   slug: string;
-  releasedAt?: string | null;
+  releasedAt: string;
   title: string;
   description?: string | null;
   thumbnail?: (string | null) | Media;

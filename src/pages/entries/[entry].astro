@@ -2,8 +2,6 @@
 import type { Entry, Media } from '@cms/payload-types';
 import Layout from '../../layouts/Layout.astro';
 import InfoBlock from '../../components/InfoBlock.astro';
-import SerializedRichtext from '../../components/SerializedRichtext.astro';
-import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 import { lexicalToHTML } from '../../utils/lexicalToHtml';
 import { sanitizeHTML } from '../../utils/sanitizeHtml';
 
@@ -32,7 +30,6 @@ const learningsHtml = lexicalToHTML(entryData?.learnings);
 const nextStepsHtml = lexicalToHTML(entryData?.nextSteps);
 const learningsHtmlSanitized = sanitizeHTML(learningsHtml);
 const nextStepsHtmlSanitized = sanitizeHTML(nextStepsHtml);
-console.log(nextStepsHtmlSanitized);
 ---
 
 <Layout>
@@ -47,7 +44,7 @@ console.log(nextStepsHtmlSanitized);
                 </InfoBlock>
                 <InfoBlock>
                     <span class="contents" slot="title">Created At</span>
-                    <p slot="description">{new Date(entryData?.createdAt).toLocaleDateString()}</p>
+                    <p slot="description">{new Date(entryData?.releasedAt).toLocaleDateString('fr-FR')}</p>
                 </InfoBlock>
                 <InfoBlock> 
                     <span class="contents" slot="title">Tags</span>
