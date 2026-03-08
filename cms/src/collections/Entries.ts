@@ -17,6 +17,7 @@ export const Entries: CollectionConfig = {
     {
       name: 'releasedAt',
       type: 'date',
+      required: true,
       admin: {
         date: {
           pickerAppearance: 'dayOnly'

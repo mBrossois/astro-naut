@@ -10,9 +10,9 @@ console.log('entries', entries);
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
     {entries.map(entry => (
-        <a href={`/entries/${entry.slug}`} class="bg-purple-300 border border-purple-950 text-purple-950 hover:bg-purple-950 hover:border-purple-400 hover:text-purple-400 rounded-lg shadow-md hover:opacity-100 transition duration-250">
-            <img src={`http://localhost:3000${(entry.thumbnail as Media)?.url}`} alt={entry.title} class="w-full h-48 object-cover rounded-t-lg opacity-70 " />
-            <div class="p-4">
+        <a href={`/entries/${entry.slug}`} class="p-2 bg-purple-300 border border-purple-200 text-purple-950 hover:bg-purple-950 hover:border-purple-400 hover:text-purple-300 rounded-lg shadow-md hover:opacity-100 transition duration-250">
+            <img src={`http://localhost:3000${(entry.thumbnail as Media)?.url}`} alt={entry.title} class="w-full h-48 object-cover rounded-t-lg mb-4" />
+            <div>
                 <h2 class="text-2xl font-bold">{entry.title}</h2>
                 <p>{entry.description}</p>
             </div>
