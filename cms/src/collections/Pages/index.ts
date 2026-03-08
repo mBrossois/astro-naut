@@ -142,4 +142,10 @@ export const Pages: CollectionConfig = {
 //     },
 //     maxPerDoc: 50,
 //   },
+  indexes: [
+    {
+      fields: ['slug', 'createdAt'],
+      unique: true
+    }
+  ]
 }

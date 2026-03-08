@@ -1,4 +1,4 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -51,12 +51,10 @@ export default buildConfig({
   //     url: process.env.DATABASE_URL || '',
   //   },
   // }),
-  db: postgresAdapter({
-    // Postgres-specific arguments go here.
-    // `pool` is required.
-    pool: {
-      connectionString: process.env.DATABASE_URL,
-    },
+  db: mongooseAdapter({
+    // Mongoose-specific arguments go here.
+    // URL is required.
+    url: process.env.DATABASE_URL || '',
   }),
   sharp,
   plugins: [],

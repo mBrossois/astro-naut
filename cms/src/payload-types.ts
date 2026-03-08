@@ -88,7 +88,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   fallbackLocale: null;
   globals: {
@@ -130,7 +130,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   roles: 'admin' | 'editor' | 'readOnly';
   updatedAt: string;
   createdAt: string;
@@ -156,7 +156,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -175,11 +175,16 @@ export interface Media {
  * via the `definition` "entries".
  */
 export interface Entry {
-  id: number;
+  id: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
   slug: string;
+  releasedAt?: string | null;
   title: string;
   description?: string | null;
-  thumbnail?: (number | null) | Media;
+  thumbnail?: (string | null) | Media;
   tags: {
     tag: 'Web Dev FE' | 'Web Dev BE' | '3D Printing' | 'Other';
     id?: string | null;
@@ -224,7 +229,7 @@ export interface Entry {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number;
+  id: string;
   title: string;
   publishedOn?: string | null;
   content?: (EntriesOverview | ContentBlock | Hero)[] | null;
@@ -243,7 +248,7 @@ export interface Page {
 export interface EntriesOverview {
   entries?:
     | {
-        entry?: (number | null) | Entry;
+        entry?: (string | null) | Entry;
         id?: string | null;
       }[]
     | null;
@@ -272,7 +277,7 @@ export interface ContentBlock {
  * via the `definition` "Image".
  */
 export interface Image {
-  image: number | Media;
+  image: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Image';
@@ -308,7 +313,7 @@ export interface RichText {
 export interface Hero {
   heading: string;
   subheading?: string | null;
-  image?: (number | null) | Media;
+  image?: (string | null) | Media;
   cta?: {
     label?: string | null;
     url?: string | null;
@@ -322,7 +327,7 @@ export interface Hero {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number;
+  id: string;
   key: string;
   data:
     | {
@@ -339,28 +344,28 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'entries';
-        value: number | Entry;
+        value: string | Entry;
       } | null)
     | ({
         relationTo: 'pages';
-        value: number | Page;
+        value: string | Page;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -370,10 +375,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -393,7 +398,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -445,7 +450,9 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "entries_select".
  */
 export interface EntriesSelect<T extends boolean = true> {
+  generateSlug?: T;
   slug?: T;
+  releasedAt?: T;
   title?: T;
   description?: T;
   thumbnail?: T;
@@ -595,9 +602,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "nav".
  */
 export interface Nav {
-  id: number;
+  id: string;
   items: {
-    page: number | Page;
+    page: string | Page;
     id?: string | null;
   }[];
   updatedAt?: string | null;

@@ -1,5 +1,5 @@
 import { adminOrAccessToken, adminOrPublished } from '@/utils/auth'
-import { type CollectionConfig, type FieldAccess } from 'payload'
+import { slugField, type CollectionConfig, type FieldAccess } from 'payload'
 
 export const Entries: CollectionConfig = {
   slug: 'entries',
@@ -13,15 +13,14 @@ export const Entries: CollectionConfig = {
     drafts: true,
   },
   fields: [
-    { 
-      name: 'slug',
-      type: 'text',
-      unique: true,
-      required: true,
-      access: {
-        read: adminOrAccessToken,
-      },
+    slugField({useAsSlug: 'title'}),
+    {
+      name: 'releasedAt',
+      type: 'date',
       admin: {
+        date: {
+          pickerAppearance: 'dayOnly'
+        },
         position: 'sidebar'
       }
     },
@@ -57,10 +56,15 @@ export const Entries: CollectionConfig = {
     {
         name: 'nextSteps',
         type: 'richText',
-    }
+    },
   ],
   lockDocuments: {
     duration: 600, // Duration in seconds
   },
   trash: true,
+  indexes: [
+    {
+      fields: ['slug'], 
+    }
+  ]
 }
