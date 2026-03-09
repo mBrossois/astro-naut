@@ -24,6 +24,11 @@ ul {
   list-style-position: inside;
 }
 
-h3 {
+.rich-text h3 {
   font-size: 1.25rem;
+}
+
+.rich-text a {
+  text-decoration: underline;
+  color: var(--color-purple-300);
 }
