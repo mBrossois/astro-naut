@@ -2,8 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import type { Entry } from '@cms/payload-types';
 import EntriesComponent from '../components/Entries.astro';
+import { CMS_API } from 'astro:env/server';
 
-const response = await fetch('http://localhost:3000/api/entries?limit=100&sort=createdAt:desc', {
+const response = await fetch(`${CMS_API}/api/entries?limit=100&sort=createdAt:desc`, {
 	method: 'GET',
 	headers: {
 		'Content-Type': 'application/json',

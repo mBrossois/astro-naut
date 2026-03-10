@@ -1,8 +1,10 @@
 ---
 import type { Hero, Media } from '@cms/payload-types';
 import heroImage from '../assets/astronaut-no-bg.png';
+import { CMS_API } from "astro:env/server";
 
-const response = await fetch('http://localhost:3000/api/pages?where[slug][equals]=home&limit=1', {
+
+const response = await fetch(`${CMS_API}/api/pages?where[slug][equals]=home&limit=1`, {
 	method: 'GET',
 	headers: {
 		'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ const heading = heroBlock?.heading;
 const subheading = heroBlock?.subheading;
 const cta = heroBlock?.cta;
 // Prefer uploaded image, fallback to block default, then background asset
-const imageUrl = `http://localhost:3000${(heroBlock?.image as Media)?.url}`;
+const imageUrl = `${CMS_API}${(heroBlock?.image as Media)?.url}`;
 const imageAlt = (heroBlock?.image as Media)?.alt;
 ---
 

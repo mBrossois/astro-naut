@@ -4,10 +4,10 @@ import Layout from '../../layouts/Layout.astro';
 import InfoBlock from '../../components/InfoBlock.astro';
 import { lexicalToHTML } from '../../utils/lexicalToHtml';
 import { sanitizeHTML } from '../../utils/sanitizeHtml';
-
+import { CMS_API } from 'astro:env/server';
 
 export async function getStaticPaths() {
-  const response = await fetch(`http://localhost:3000/api/entries`, {
+  const response = await fetch(`${CMS_API}/api/entries`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

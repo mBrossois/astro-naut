@@ -1,7 +1,8 @@
 ---
 import type { Nav, Page } from '@cms/payload-types';
+import { CMS_API } from 'astro:env/server';
 
-const response = await fetch('http://localhost:3000/api/globals/nav', {
+const response = await fetch(`${CMS_API}/api/globals/nav`, {
 	method: 'GET',
 	headers: {
 		'Content-Type': 'application/json',
