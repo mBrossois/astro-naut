@@ -1,4 +1,5 @@
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+// import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -49,16 +50,16 @@ export default buildConfig({
   routes: {
     admin: '/'
   },
-  // db: sqliteAdapter({
-  //   client: {
-  //     url: process.env.DATABASE_URL || '',
-  //   },
-  // }),
-  db: mongooseAdapter({
-    // Mongoose-specific arguments go here.
-    // URL is required.
-    url: process.env.DATABASE_URL || '',
+  db: sqliteAdapter({
+    client: {
+      url: process.env.DATABASE_URL || '',
+    },
   }),
+  // db: mongooseAdapter({
+  //   // Mongoose-specific arguments go here.
+  //   // URL is required.
+  //   url: process.env.DATABASE_URL || '',
+  // }),
   sharp,
   plugins: [],
   cors: {

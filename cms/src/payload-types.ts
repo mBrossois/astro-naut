@@ -88,7 +88,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {
@@ -130,7 +130,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   roles: 'admin' | 'editor' | 'readOnly';
   updatedAt: string;
   createdAt: string;
@@ -156,7 +156,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -175,7 +175,7 @@ export interface Media {
  * via the `definition` "entries".
  */
 export interface Entry {
-  id: string;
+  id: number;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -184,7 +184,7 @@ export interface Entry {
   releasedAt: string;
   title: string;
   description?: string | null;
-  thumbnail?: (string | null) | Media;
+  thumbnail?: (number | null) | Media;
   tags: {
     tag: 'Web Dev FE' | 'Web Dev BE' | '3D Printing' | 'Other';
     id?: string | null;
@@ -229,7 +229,7 @@ export interface Entry {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   publishedOn?: string | null;
   content?: (EntriesOverview | ContentBlock | Hero)[] | null;
@@ -248,7 +248,7 @@ export interface Page {
 export interface EntriesOverview {
   entries?:
     | {
-        entry?: (string | null) | Entry;
+        entry?: (number | null) | Entry;
         id?: string | null;
       }[]
     | null;
@@ -277,7 +277,7 @@ export interface ContentBlock {
  * via the `definition` "Image".
  */
 export interface Image {
-  image: string | Media;
+  image: number | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Image';
@@ -313,7 +313,7 @@ export interface RichText {
 export interface Hero {
   heading: string;
   subheading?: string | null;
-  image?: (string | null) | Media;
+  image?: (number | null) | Media;
   cta?: {
     label?: string | null;
     url?: string | null;
@@ -327,7 +327,7 @@ export interface Hero {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -344,28 +344,28 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'entries';
-        value: string | Entry;
+        value: number | Entry;
       } | null)
     | ({
         relationTo: 'pages';
-        value: string | Page;
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -375,10 +375,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -398,7 +398,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -602,9 +602,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "nav".
  */
 export interface Nav {
-  id: string;
+  id: number;
   items: {
-    page: string | Page;
+    page: number | Page;
     id?: string | null;
   }[];
   updatedAt?: string | null;

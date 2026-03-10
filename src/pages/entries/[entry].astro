@@ -33,7 +33,12 @@ const nextStepsHtmlSanitized = sanitizeHTML(nextStepsHtml);
 ---
 
 <Layout>
-    <div class="container p-4 flex flex-col gap-4">
+    <div class="container p-8 flex flex-col gap-4">
+        <ul class="list-none! text-xs text-purple-200">
+            {entryData?.tags.map((tag) => (
+                <li key={tag.id}>{tag.tag}</li>
+            ))}
+        </ul>
         <h1 class="text-4xl font-bold text-purple-300">{entryData?.title}</h1>
         <div class="flex gap-4">
             <img src={`http://localhost:3000${(entryData?.thumbnail as Media)?.url}`} alt={entryData?.title} class="h-48 w-48 object-cover rounded-t-lg opacity-70 " />
@@ -45,16 +50,6 @@ const nextStepsHtmlSanitized = sanitizeHTML(nextStepsHtml);
                 <InfoBlock>
                     <span class="contents" slot="title">Created At</span>
                     <p slot="description">{new Date(entryData?.releasedAt).toLocaleDateString('fr-FR')}</p>
-                </InfoBlock>
-                <InfoBlock> 
-                    <span class="contents" slot="title">Tags</span>
-                    <div slot="description">
-                        <ul>
-                            {entryData?.tags.map((tag) => (
-                                <li key={tag.id}>{tag.tag}</li>
-                            ))}
-                        </ul>
-                    </div>
                 </InfoBlock>
             </div>
         </div>

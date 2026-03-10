@@ -8,7 +8,7 @@ const { entries } = Astro.props;
 console.log('entries', entries);
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 p-8">
     {entries.map(entry => (
         <a href={`/entries/${entry.slug}`} class="p-2 bg-purple-300 border border-purple-200 text-purple-950 hover:bg-purple-950 hover:border-purple-400 hover:text-purple-300 rounded-lg shadow-md hover:opacity-100 transition duration-250">
             <img src={`http://localhost:3000${(entry.thumbnail as Media)?.url}`} alt={entry.title} class="w-full h-48 object-cover rounded-t-lg mb-4" />
